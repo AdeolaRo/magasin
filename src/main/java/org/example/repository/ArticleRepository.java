@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.entity.Article;
+import org.example.entity.Vente;
 import org.example.util.SessionfactorySingleton;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,56 +16,57 @@ public class ArticleRepository {
         session = sessionFactory.openSession();
     }
 
-    public Article create (Article article){
-        try{
+    public Article create(Article article) {
+        try {
             session = sessionFactory.openSession();
             session.beginTransaction();
             session.save(article);
             session.getTransaction().commit();
             return article;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             session.getTransaction().rollback();
             return null;
-        }finally {
+        } finally {
             session.close();
         }
     }
 
-    public boolean delete  (Article article){
-        try{
+    public boolean delete(Article article) {
+        try {
             session = sessionFactory.openSession();
             session.beginTransaction();
             session.delete(article);
             session.getTransaction().commit();
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             session.getTransaction().rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
 
-    public Article update  (Article article){
-        try{
+    public Article update(Article article) {
+        try {
             session = sessionFactory.openSession();
             session.beginTransaction();
             session.saveOrUpdate(article);
             session.getTransaction().commit();
             return article;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             session.getTransaction().rollback();
             return null;
-        }finally {
+        } finally {
             session.close();
         }
     }
 
-    public Article findById (int id ){
+    public Article findById(int id) {
         session = sessionFactory.openSession();
-        Article article = session.get(Article.class,id);
+        Article article = session.get(Article.class, id);
         session.close();
         return article;
     }
+
 
 }

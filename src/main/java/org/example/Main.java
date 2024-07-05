@@ -28,8 +28,7 @@ public class Main {
 
 
 
-
-        Client c1 = Client.builder()
+      Client c1 = Client.builder()
                 .nom("Léo B")
                 .email("leob.gmail.com")
                 .build();
@@ -67,6 +66,15 @@ public class Main {
         venteRepository.create(v1);
         venteRepository.create(v2);
 
+        List<Vente> venteList = venteRepository.findVenteByDate(LocalDate.of(2023,11,11));
+        for (Vente vente : venteList){
+            System.out.println(vente);
+        }
+
+        Article article = articleRepository.findById(Thon.getId());
+        for (Vente vente : article.getVentes()){
+            System.out.println(vente);
+        }
     }
 
 

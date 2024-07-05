@@ -37,7 +37,7 @@ public abstract class Article {
     @Column(name = "Date_Restock")
     protected LocalDate dateRestock;
 
-    @ManyToMany(mappedBy = "articles")
+    @ManyToMany(mappedBy = "articles", fetch = FetchType.EAGER)
     private List<Vente> ventes;
 
 }

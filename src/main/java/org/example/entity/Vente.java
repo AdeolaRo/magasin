@@ -31,8 +31,6 @@ public class Vente {
     )
     private List<Article> articles;
 
-
-
     @ManyToOne
     @JoinColumn(name = "id_client")
     Client client;
@@ -49,4 +47,10 @@ public class Vente {
         articles.add(article);
     }
 
+    @Override
+    public String toString() {
+        return "Vente{" +
+                "dateVente=" + dateVente +
+                '}';
+    }
 }

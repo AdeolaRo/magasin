@@ -5,6 +5,8 @@ import org.example.util.SessionfactorySingleton;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.List;
 
 public class VenteRepository {
@@ -51,7 +53,7 @@ public class VenteRepository {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.saveOrUpdate(vente);
+            session.update(vente);
             session.getTransaction().commit();
             return vente;
         } catch (Exception ex) {
@@ -67,6 +69,18 @@ public class VenteRepository {
         Vente vente = session.get(Vente.class, id);
         session.close();
         return vente;
+    }
+
+
+    public List<Vente> findVenteByDate(LocalDate date) {
+        Session session = sessionFactory.openSession();
+        Query q = session.createQuery("from Vente v where v.dateVente = :date");
+        q.setParameter("date", date);
+        List<Vente> venteList = q.getResultList();
+//        for (Vente vente : venteList) {
+//            System.out.println(vente);
+//        }
+        return venteList;
     }
 
 }
